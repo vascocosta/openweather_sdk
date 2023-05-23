@@ -66,7 +66,17 @@ pub struct ForecastDescription {
     pub pop: f64,
     pub rain: Option<Rain>,
     pub sys: Sys,
-    pub dt_txt: String
+    pub dt_txt: String,
+    pub sunrise: i64,
+    pub sunset: i64,
+    pub temp: Temp,
+    #[serde(rename = "feels_like")]
+    pub feels_like: FeelsLike,
+    pub pressure: i64,
+    pub humidity: i64,
+    pub speed: f64,
+    pub deg: i64,
+    pub gust: f64,
 }
 
 impl fmt::Display for ForecastDescription {

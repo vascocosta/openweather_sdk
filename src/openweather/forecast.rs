@@ -65,15 +65,15 @@ impl Forecast {
     //     Ok(resp)
     // }
     //
-    // pub async fn get_daily_forecast(&self, lat: f64,lon: f64, count: u8) -> Result<ForecastResponse, Box<dyn std::error::Error>> {
-    //     let url = self.format_query(lat, lon, "/daily", count);
-    //     let resp = reqwest::get(url)
-    //         .await?
-    //         .json::<ForecastResponse>()
-    //         .await?;
-    //
-    //     Ok(resp)
-    // }
+    pub async fn get_daily_forecast(&self, lat: f64,lon: f64, count: u8) -> Result<ForecastResponse, Box<dyn std::error::Error>> {
+        let url = self.format_query(lat, lon, "/daily", count);
+        let resp = reqwest::get(url)
+            .await?
+            .json::<ForecastResponse>()
+            .await?;
+    
+        Ok(resp)
+    }
     //
     // pub async fn get_climate_forecast(&self, lat: f64,lon: f64, count: u8) -> Result<ForecastResponse, Box<dyn std::error::Error>> {
     //     let url = self.format_query(lat, lon, "/climate", count);
