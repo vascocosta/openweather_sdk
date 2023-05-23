@@ -6,6 +6,8 @@ use crate::responses::response_elements::Clouds;
 use crate::responses::response_elements::Rain;
 use crate::responses::response_elements::Wind;
 use crate::responses::response_elements::Coord;
+use crate::responses::response_elements::Temp;
+use crate::responses::one_call_response::FeelsLike;
 
 #[derive(Debug, Serialize, Deserialize, Ord, PartialOrd, Eq, PartialEq, Hash, Default, Clone)]
 pub struct Sys {
