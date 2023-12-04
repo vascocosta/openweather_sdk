@@ -1,10 +1,10 @@
-use serde::{ Serialize, Deserialize };
-use crate::responses::response_elements::Weather;
 use crate::responses::response_elements::Rain;
 use crate::responses::response_elements::Snow;
 use crate::responses::response_elements::Temp;
-use std::fmt;
+use crate::responses::response_elements::Weather;
 use crate::utils::display_option;
+use serde::{Deserialize, Serialize};
+use std::fmt;
 
 #[derive(Debug, Serialize, Deserialize, PartialOrd, PartialEq, Default, Clone)]
 pub struct Current {
@@ -18,13 +18,13 @@ pub struct Current {
     pub dew_point: f64,
     pub uvi: f64,
     pub clouds: u64,
-    pub visibility: i64,
+    pub visibility: Option<i64>,
     pub wind_speed: f64,
     pub wind_deg: u64,
     pub wind_gust: Option<f64>,
     pub rain: Option<Rain>,
     pub snow: Option<Snow>,
-    pub weather: Vec<Weather>
+    pub weather: Vec<Weather>,
 }
 
 impl fmt::Display for Current {
@@ -49,7 +49,7 @@ impl fmt::Display for Current {
             self.dew_point,
             self.uvi,
             self.clouds,
-            self.visibility,
+            display_option(&self.visibility),
             self.wind_speed,
             self.wind_deg,
             display_option(&self.wind_gust),
@@ -65,7 +65,7 @@ pub struct FeelsLike {
     pub day: f64,
     pub night: f64,
     pub eve: f64,
-    pub morn: f64
+    pub morn: f64,
 }
 
 impl fmt::Display for FeelsLike {
@@ -73,10 +73,7 @@ impl fmt::Display for FeelsLike {
         write!(
             f,
             "FeelsLike: (day: {}, night: {}, eve: {}, morn: {})",
-            self.day,
-            self.night,
-            self.eve,
-            self.morn
+            self.day, self.night, self.eve, self.morn
         )
     }
 }
@@ -103,7 +100,7 @@ pub struct Daily {
     pub pop: f64,
     pub rain: Option<f64>,
     pub snow: Option<f64>,
-    pub uvi: f64
+    pub uvi: f64,
 }
 
 impl fmt::Display for Daily {
@@ -160,8 +157,8 @@ pub struct Hourly {
     pub rain: Option<Rain>,
     pub snow: Option<Snow>,
     pub weather: Vec<Weather>,
-    pub pop: f64
-    }
+    pub pop: f64,
+}
 
 impl fmt::Display for Hourly {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
@@ -199,7 +196,7 @@ impl fmt::Display for Hourly {
 pub struct Minutely {
     #[serde(alias = "dt")]
     pub datetime: i64,
-    pub precipitation: f64
+    pub precipitation: f64,
 }
 
 impl fmt::Display for Minutely {
@@ -207,8 +204,7 @@ impl fmt::Display for Minutely {
         write!(
             f,
             "Minutely: (datetime: {}, precipitation: {})",
-            self.datetime,
-            self.precipitation
+            self.datetime, self.precipitation
         )
     }
 }
@@ -220,7 +216,7 @@ pub struct Alert {
     pub start: i64,
     pub end: i64,
     pub description: String,
-    pub tags: Vec<String>
+    pub tags: Vec<String>,
 }
 
 impl fmt::Display for Alert {
@@ -235,12 +231,7 @@ impl fmt::Display for Alert {
         write!(
             f,
             "Alert: (sender_name: {}, event: {}, start: {}, end: {}, description: {}, tags: {})",
-            self.sender_name,
-            self.event,
-            self.start,
-            self.end,
-            self.description,
-            tags_list
+            self.sender_name, self.event, self.start, self.end, self.description, tags_list
         )
     }
 }
@@ -255,7 +246,7 @@ pub struct OneCallResponse {
     pub minutely: Option<Vec<Minutely>>,
     pub hourly: Option<Vec<Hourly>>,
     pub daily: Option<Vec<Daily>>,
-    pub alerts: Option<Vec<Alert>>
+    pub alerts: Option<Vec<Alert>>,
 }
 
 impl fmt::Display for OneCallResponse {
