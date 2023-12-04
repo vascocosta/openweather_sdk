@@ -18,7 +18,6 @@ pub struct Current {
     pub dew_point: f64,
     pub uvi: f64,
     pub clouds: u64,
-    pub visibility: Option<i64>,
     pub wind_speed: f64,
     pub wind_deg: u64,
     pub wind_gust: Option<f64>,
@@ -38,7 +37,7 @@ impl fmt::Display for Current {
 
         write!(
             f,
-            "Current: (dt: {}, sunrise: {}, sunset: {}, temp: {}, feels_like: {}, pressure: {}, humidity: {}, dew_point: {}, uvi: {}, clouds: {}, visibility: {}, wind_speed: {}, wind_deg: {}, wind_gust: {}, rain: {}, snow: {}, weather: {})",
+            "Current: (dt: {}, sunrise: {}, sunset: {}, temp: {}, feels_like: {}, pressure: {}, humidity: {}, dew_point: {}, uvi: {}, clouds: {}, wind_speed: {}, wind_deg: {}, wind_gust: {}, rain: {}, snow: {}, weather: {})",
             self.dt,
             self.sunrise,
             self.sunset,
@@ -49,7 +48,6 @@ impl fmt::Display for Current {
             self.dew_point,
             self.uvi,
             self.clouds,
-            display_option(&self.visibility),
             self.wind_speed,
             self.wind_deg,
             display_option(&self.wind_gust),
@@ -150,7 +148,6 @@ pub struct Hourly {
     pub dew_point: f64,
     pub uvi: f64,
     pub clouds: u64,
-    pub visibility: Option<i64>,
     pub wind_speed: f64,
     pub wind_deg: u64,
     pub wind_gust: Option<f64>,
@@ -171,7 +168,7 @@ impl fmt::Display for Hourly {
 
         write!(
             f,
-            "Hourly: (datetime: {}, temp: {}, feels_like: {}, pressure: {}, humidity: {}, dew_point: {}, uvi: {}, clouds: {}, visibility: {}, wind_speed: {}, wind_deg: {}, wind_gust: {}, rain: {}, snow: {}, weather: {}, pop: {})",
+            "Hourly: (datetime: {}, temp: {}, feels_like: {}, pressure: {}, humidity: {}, dew_point: {}, uvi: {}, clouds: {}, wind_speed: {}, wind_deg: {}, wind_gust: {}, rain: {}, snow: {}, weather: {}, pop: {})",
             self.datetime,
             self.temp,
             self.feels_like,
@@ -180,7 +177,6 @@ impl fmt::Display for Hourly {
             self.dew_point,
             self.uvi,
             self.clouds,
-            display_option(&self.visibility),
             self.wind_speed,
             self.wind_deg,
             display_option(&self.wind_gust),
